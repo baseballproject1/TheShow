@@ -1,0 +1,1370 @@
+```css
+/* =========================================================
+   THE SHOW RTTS
+   css/game.css
+   게임 플레이 화면 전용 스타일
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Game Screen
+   --------------------------------------------------------- */
+
+#gameScreen {
+    min-height: 100vh;
+}
+
+#gameScreen.active {
+    display: block;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.game-header .team {
+    min-width: 120px;
+    text-align: center;
+}
+
+.game-header .team-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--muted-text);
+    margin-bottom: 4px;
+}
+
+.game-header .team-score {
+    display: block;
+    font-size: 34px;
+    line-height: 1;
+    font-weight: 900;
+    color: var(--text-main);
+}
+
+.game-header .game-center {
+    flex: 1;
+    text-align: center;
+}
+
+.game-header .game-center .inning {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted-text);
+}
+
+.game-header .game-center .count {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+
+/* ---------------------------------------------------------
+   Game Status
+   --------------------------------------------------------- */
+
+.game-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.game-status-item {
+    min-width: 76px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.035);
+    text-align: center;
+}
+
+.game-status-item .label {
+    display: block;
+    font-size: 10px;
+    color: var(--muted-text);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.game-status-item .value {
+    display: block;
+    font-size: 15px;
+    color: var(--text-main);
+    font-weight: 900;
+}
+
+
+/* ---------------------------------------------------------
+   Baseball Field
+   --------------------------------------------------------- */
+
+.game-field-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: #18291d;
+    box-shadow: var(--shadow-lg);
+}
+
+#fieldCanvas {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 430px;
+    height: min(62vw, 560px);
+    max-height: 560px;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(63, 123, 67, 0.95) 0%,
+            rgba(46, 101, 52, 0.96) 55%,
+            rgba(28, 66, 34, 1) 100%
+        );
+    touch-action: none;
+    user-select: none;
+}
+
+/* Outfield mowing pattern */
+
+#fieldCanvas::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.2;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 38px,
+            rgba(255, 255, 255, 0.07) 38px,
+            rgba(255, 255, 255, 0.07) 76px
+        );
+}
+
+/* Field warning track */
+
+#fieldCanvas::after {
+    content: "";
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    bottom: 4%;
+    height: 11%;
+    border-radius: 50% 50% 8% 8%;
+    background: rgba(164, 127, 80, 0.35);
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   Field Diamond
+   --------------------------------------------------------- */
+
+.baseball-diamond {
+    position: absolute;
+    left: 50%;
+    top: 51%;
+    width: min(38vw, 250px);
+    height: min(38vw, 250px);
+    transform: translate(-50%, -50%) rotate(45deg);
+    border: 3px solid rgba(255, 255, 255, 0.78);
+    background: rgba(154, 108, 66, 0.78);
+    box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.08),
+        0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.baseball-diamond .base {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #fff;
+    background: #eee;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.baseball-diamond .base-1 {
+    right: -15px;
+    top: calc(50% - 14px);
+}
+
+.baseball-diamond .base-2 {
+    left: calc(50% - 14px);
+    top: -15px;
+}
+
+.baseball-diamond .base-3 {
+    left: -15px;
+    top: calc(50% - 14px);
+}
+
+.baseball-diamond .home-base {
+    left: calc(50% - 14px);
+    bottom: -15px;
+}
+
+
+/* ---------------------------------------------------------
+   Field Player
+   --------------------------------------------------------- */
+
+#fieldPlayer {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #2764d8;
+    box-shadow:
+        0 0 0 5px rgba(39, 100, 216, 0.25),
+        0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
+    z-index: 8;
+    pointer-events: none;
+    transition:
+        left 0.08s linear,
+        top 0.08s linear;
+}
+
+#fieldPlayer::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+}
+
+
+/* ---------------------------------------------------------
+   Ball
+   --------------------------------------------------------- */
+
+#ball {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    pointer-events: none;
+    transition:
+        left 0.08s linear,
+        top 0.08s linear;
+}
+
+#ball::before,
+#ball::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 2px;
+    border-radius: 50%;
+    background: #d73737;
+    transform: rotate(-35deg);
+}
+
+#ball::before {
+    left: 2px;
+    top: 4px;
+}
+
+#ball::after {
+    right: 2px;
+    bottom: 4px;
+    transform: rotate(-35deg);
+}
+
+
+/* ---------------------------------------------------------
+   Game Controls
+   --------------------------------------------------------- */
+
+.game-controls {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.control-panel {
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--panel-bg);
+    box-shadow: var(--shadow-md);
+}
+
+.control-panel h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--text-main);
+}
+
+.control-panel-description {
+    margin: -4px 0 12px;
+    font-size: 12px;
+    color: var(--muted-text);
+}
+
+
+/* ---------------------------------------------------------
+   Batting
+   --------------------------------------------------------- */
+
+#battingControls {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr);
+    gap: 16px;
+}
+
+#battingControls.hidden,
+#pitchingControls.hidden,
+#fieldingControls.hidden,
+#baserunningControls.hidden {
+    display: none;
+}
+
+#battingZone {
+    position: relative;
+    width: min(100%, 300px);
+    aspect-ratio: 4 / 5;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            rgba(20, 20, 20, 0.12),
+            rgba(20, 20, 20, 0.12)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 25%,
+            rgba(255, 255, 255, 0.08) 25%,
+            rgba(255, 255, 255, 0.08) 25.5%
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 25%,
+            rgba(255, 255, 255, 0.08) 25%,
+            rgba(255, 255, 255, 0.08) 25.5%
+        );
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 8px 20px rgba(0, 0, 0, 0.25);
+    touch-action: none;
+}
+
+#battingZone::before {
+    content: "";
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: 9%;
+    bottom: 9%;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+}
+
+#battingZone::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+#battingCursor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 74px;
+    height: 74px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 0 2px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(255, 255, 255, 0.18);
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+    transition:
+        left 0.05s linear,
+        top 0.05s linear;
+}
+
+#battingCursor::before,
+#battingCursor::after {
+    content: "";
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#battingCursor::before {
+    left: 50%;
+    top: -10px;
+    width: 2px;
+    height: calc(100% + 20px);
+    transform: translateX(-50%);
+}
+
+#battingCursor::after {
+    left: -10px;
+    top: 50%;
+    width: calc(100% + 20px);
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+#battingCursor.active {
+    border-color: var(--accent);
+    box-shadow:
+        0 0 0 2px rgba(0, 0, 0, 0.35),
+        0 0 25px rgba(255, 193, 7, 0.45);
+}
+
+#battingCursor.hit {
+    border-color: #5ee38c;
+    background: rgba(94, 227, 140, 0.16);
+}
+
+#battingCursor.miss {
+    border-color: #ff5d5d;
+    background: rgba(255, 93, 93, 0.12);
+}
+
+
+/* ---------------------------------------------------------
+   Pitching Zone
+   --------------------------------------------------------- */
+
+#pitchZone {
+    position: relative;
+    width: min(100%, 300px);
+    aspect-ratio: 4 / 5;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            rgba(18, 29, 44, 0.25),
+            rgba(18, 29, 44, 0.25)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 20%,
+            rgba(255, 255, 255, 0.07) 20%,
+            rgba(255, 255, 255, 0.07) 20.5%
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 20%,
+            rgba(255, 255, 255, 0.07) 20%,
+            rgba(255, 255, 255, 0.07) 20.5%
+        );
+    touch-action: none;
+}
+
+#pitchCursor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 58px;
+    height: 58px;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    background: rgba(255, 193, 7, 0.08);
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+    transition:
+        left 0.05s linear,
+        top 0.05s linear;
+}
+
+#pitchCursor::before,
+#pitchCursor::after {
+    content: "";
+    position: absolute;
+    background: rgba(255, 193, 7, 0.9);
+}
+
+#pitchCursor::before {
+    left: 50%;
+    top: -8px;
+    width: 2px;
+    height: calc(100% + 16px);
+    transform: translateX(-50%);
+}
+
+#pitchCursor::after {
+    left: -8px;
+    top: 50%;
+    width: calc(100% + 16px);
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+
+/* ---------------------------------------------------------
+   Virtual Joystick
+   --------------------------------------------------------- */
+
+.virtual-controller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-height: 150px;
+}
+
+.joystick {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    flex: 0 0 128px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.09) 0 30%,
+            rgba(255, 255, 255, 0.045) 31% 62%,
+            rgba(255, 255, 255, 0.02) 63% 100%
+        );
+    box-shadow:
+        inset 0 0 25px rgba(0, 0, 0, 0.25),
+        0 5px 15px rgba(0, 0, 0, 0.25);
+    touch-action: none;
+    user-select: none;
+}
+
+.joystick::before,
+.joystick::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+.joystick::before {
+    width: 1px;
+    height: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.joystick::after {
+    width: 100%;
+    height: 1px;
+    transform: translate(-50%, -50%);
+}
+
+.joystick-knob {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 56px;
+    height: 56px;
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.13);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.35),
+        inset 0 0 12px rgba(255, 255, 255, 0.08);
+    transform: translate(-50%, -50%);
+    transition:
+        transform 0.06s linear;
+    pointer-events: none;
+}
+
+.joystick-knob.active {
+    background: rgba(255, 193, 7, 0.2);
+    border-color: var(--accent);
+}
+
+
+/* ---------------------------------------------------------
+   Action Buttons
+   --------------------------------------------------------- */
+
+.action-button {
+    min-width: 110px;
+    min-height: 56px;
+    padding: 12px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.055);
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition:
+        transform 0.12s ease,
+        background 0.12s ease,
+        border-color 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+.action-button:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.action-button:active {
+    transform: scale(0.95);
+}
+
+.action-button.primary {
+    background: var(--accent);
+    color: #111;
+    border-color: var(--accent);
+}
+
+.action-button.primary:hover {
+    background: #ffd54a;
+}
+
+.action-button.danger {
+    border-color: rgba(255, 92, 92, 0.45);
+    color: #ff8d8d;
+}
+
+.action-button.success {
+    border-color: rgba(94, 227, 140, 0.45);
+    color: #79eea0;
+}
+
+
+/* ---------------------------------------------------------
+   Batting Controls
+   --------------------------------------------------------- */
+
+.batting-control-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+#swingButton {
+    width: min(100%, 210px);
+    min-height: 68px;
+    border-radius: 18px;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    background: var(--accent);
+    color: #111;
+    border-color: var(--accent);
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.22),
+        0 0 0 0 rgba(255, 193, 7, 0.3);
+}
+
+#swingButton:hover {
+    background: #ffd54a;
+}
+
+#swingButton:active {
+    transform: scale(0.94);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.25),
+        0 0 0 8px rgba(255, 193, 7, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   Pitch Selection
+   --------------------------------------------------------- */
+
+.pitch-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.pitch-buttons button {
+    min-height: 48px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--text-main);
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        background 0.12s ease,
+        border-color 0.12s ease,
+        transform 0.12s ease;
+}
+
+.pitch-buttons button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.pitch-buttons button:active {
+    transform: scale(0.97);
+}
+
+.pitch-buttons button.active,
+.pitch-buttons button.selected {
+    border-color: var(--accent);
+    background: rgba(255, 193, 7, 0.13);
+    color: var(--accent);
+}
+
+
+/* ---------------------------------------------------------
+   Fielding
+   --------------------------------------------------------- */
+
+#fieldingControls {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr);
+    gap: 16px;
+}
+
+.fielding-control-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+#throwAim {
+    position: relative;
+    width: min(100%, 250px);
+    aspect-ratio: 1;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.07) 0 18%,
+            transparent 19% 34%,
+            rgba(255, 255, 255, 0.06) 35% 35.5%,
+            transparent 36% 53%,
+            rgba(255, 255, 255, 0.06) 54% 54.5%,
+            transparent 55% 100%
+        );
+    touch-action: none;
+}
+
+.throw-target {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    border: 3px solid #ffcf4a;
+    border-radius: 50%;
+    background: rgba(255, 193, 7, 0.08);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition:
+        left 0.05s linear,
+        top 0.05s linear;
+}
+
+.throw-target::before,
+.throw-target::after {
+    content: "";
+    position: absolute;
+    background: #ffcf4a;
+}
+
+.throw-target::before {
+    left: 50%;
+    top: -7px;
+    width: 2px;
+    height: calc(100% + 14px);
+    transform: translateX(-50%);
+}
+
+.throw-target::after {
+    top: 50%;
+    left: -7px;
+    width: calc(100% + 14px);
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+.throw-target.good {
+    border-color: #5ee38c;
+}
+
+.throw-target.bad {
+    border-color: #ff5d5d;
+}
+
+#throwButton {
+    min-width: 130px;
+    min-height: 60px;
+}
+
+
+/* ---------------------------------------------------------
+   Baserunning
+   --------------------------------------------------------- */
+
+#baserunningControls {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(220px, 1fr);
+    gap: 16px;
+}
+
+.base-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.base-buttons button {
+    min-height: 52px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--text-main);
+    font-weight: 900;
+    cursor: pointer;
+    transition:
+        transform 0.12s ease,
+        background 0.12s ease,
+        border-color 0.12s ease;
+}
+
+.base-buttons button:hover {
+    background: rgba(255, 255, 255, 0.085);
+}
+
+.base-buttons button:active {
+    transform: scale(0.96);
+}
+
+.base-buttons button.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(255, 193, 7, 0.12);
+}
+
+#runningJoystick {
+    margin: 0 auto;
+}
+
+
+/* ---------------------------------------------------------
+   Game Message
+   --------------------------------------------------------- */
+
+.game-message {
+    position: absolute;
+    left: 50%;
+    top: 18%;
+    z-index: 30;
+    min-width: 180px;
+    max-width: 80%;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    background: rgba(10, 12, 16, 0.88);
+    color: #fff;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 900;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.game-message.show {
+    animation: gameMessageShow 1.2s ease forwards;
+}
+
+@keyframes gameMessageShow {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -42%) scale(0.92);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -58%) scale(0.96);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Hit / Result Indicators
+   --------------------------------------------------------- */
+
+.hit-indicator {
+    position: absolute;
+    z-index: 25;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: rgba(8, 10, 14, 0.85);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.hit-indicator.show {
+    animation: hitIndicator 0.9s ease forwards;
+}
+
+@keyframes hitIndicator {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-16px) scale(1.03);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Small Game Labels
+   --------------------------------------------------------- */
+
+.game-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--muted-text);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.game-label.live {
+    color: #ff7474;
+    background: rgba(255, 74, 74, 0.1);
+}
+
+.game-label.good {
+    color: #70e998;
+    background: rgba(94, 227, 140, 0.1);
+}
+
+.game-label.warning {
+    color: var(--accent);
+    background: rgba(255, 193, 7, 0.1);
+}
+
+
+/* ---------------------------------------------------------
+   Game Mode Buttons
+   --------------------------------------------------------- */
+
+.game-mode-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.game-mode-buttons button {
+    min-height: 42px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--text-main);
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.game-mode-buttons button.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(255, 193, 7, 0.1);
+}
+
+
+/* ---------------------------------------------------------
+   Disabled / Locked Controls
+   --------------------------------------------------------- */
+
+button:disabled,
+.action-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.control-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   Scroll / Touch
+   --------------------------------------------------------- */
+
+#gameScreen button,
+#gameScreen .joystick,
+#gameScreen #battingZone,
+#gameScreen #pitchZone,
+#gameScreen #throwAim {
+    -webkit-tap-highlight-color: transparent;
+}
+
+#gameScreen {
+    overscroll-behavior: contain;
+}
+
+
+/* ---------------------------------------------------------
+   Tablet
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    #fieldCanvas {
+        min-height: 390px;
+        height: 58vw;
+    }
+
+    #battingControls,
+    #fieldingControls,
+    #baserunningControls {
+        grid-template-columns: 1fr;
+    }
+
+    .control-panel {
+        padding: 12px;
+    }
+
+    .game-header .team-score {
+        font-size: 30px;
+    }
+
+    .baseball-diamond {
+        width: min(42vw, 230px);
+        height: min(42vw, 230px);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+    .game-header {
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .game-header .team {
+        min-width: 76px;
+    }
+
+    .game-header .team-name {
+        font-size: 11px;
+    }
+
+    .game-header .team-score {
+        font-size: 26px;
+    }
+
+    .game-header .game-center .inning,
+    .game-header .game-center .count {
+        font-size: 10px;
+    }
+
+    .game-status {
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .game-status-item {
+        min-width: 58px;
+        padding: 6px 7px;
+    }
+
+    .game-status-item .label {
+        font-size: 8px;
+    }
+
+    .game-status-item .value {
+        font-size: 13px;
+    }
+
+    #fieldCanvas {
+        min-height: 330px;
+        height: 72vw;
+        max-height: 430px;
+        border-radius: var(--radius-md);
+    }
+
+    .baseball-diamond {
+        width: min(48vw, 190px);
+        height: min(48vw, 190px);
+    }
+
+    .baseball-diamond .base {
+        width: 22px;
+        height: 22px;
+    }
+
+    .baseball-diamond .base-1 {
+        right: -12px;
+        top: calc(50% - 11px);
+    }
+
+    .baseball-diamond .base-2 {
+        left: calc(50% - 11px);
+        top: -12px;
+    }
+
+    .baseball-diamond .base-3 {
+        left: -12px;
+        top: calc(50% - 11px);
+    }
+
+    .baseball-diamond .home-base {
+        left: calc(50% - 11px);
+        bottom: -12px;
+    }
+
+    #fieldPlayer {
+        width: 24px;
+        height: 24px;
+    }
+
+    #ball {
+        width: 13px;
+        height: 13px;
+    }
+
+    .control-panel {
+        padding: 10px;
+        border-radius: var(--radius-md);
+    }
+
+    .control-panel h3 {
+        font-size: 14px;
+    }
+
+    #battingZone,
+    #pitchZone {
+        width: min(100%, 250px);
+    }
+
+    #battingCursor {
+        width: 64px;
+        height: 64px;
+    }
+
+    #pitchCursor {
+        width: 52px;
+        height: 52px;
+    }
+
+    .virtual-controller {
+        min-height: 135px;
+        gap: 12px;
+    }
+
+    .joystick {
+        width: 112px;
+        height: 112px;
+        flex-basis: 112px;
+    }
+
+    .joystick-knob {
+        width: 50px;
+        height: 50px;
+    }
+
+    .action-button {
+        min-width: 96px;
+        min-height: 52px;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    #swingButton {
+        width: min(100%, 190px);
+        min-height: 62px;
+        font-size: 17px;
+    }
+
+    #throwAim {
+        width: min(100%, 210px);
+    }
+
+    #throwButton {
+        min-width: 120px;
+    }
+
+    .pitch-buttons button,
+    .base-buttons button {
+        min-height: 46px;
+        font-size: 12px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Very Small Phones
+   --------------------------------------------------------- */
+
+@media (max-width: 380px) {
+    .game-header .team {
+        min-width: 64px;
+    }
+
+    .game-header .team-name {
+        font-size: 10px;
+    }
+
+    .game-header .team-score {
+        font-size: 23px;
+    }
+
+    #fieldCanvas {
+        min-height: 290px;
+    }
+
+    .baseball-diamond {
+        width: 155px;
+        height: 155px;
+    }
+
+    .joystick {
+        width: 98px;
+        height: 98px;
+        flex-basis: 98px;
+    }
+
+    .joystick-knob {
+        width: 44px;
+        height: 44px;
+    }
+
+    .action-button {
+        min-width: 84px;
+        min-height: 48px;
+        font-size: 12px;
+    }
+
+    #swingButton {
+        min-height: 56px;
+        font-size: 15px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Landscape Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) and (orientation: landscape) {
+    #fieldCanvas {
+        height: 70vh;
+        min-height: 280px;
+        max-height: 500px;
+    }
+
+    .game-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #battingControls,
+    #fieldingControls,
+    #baserunningControls {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .control-panel {
+        padding: 9px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Reduced Motion
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    #fieldPlayer,
+    #ball,
+    #battingCursor,
+    #pitchCursor,
+    .throw-target,
+    .joystick-knob {
+        transition: none;
+    }
+
+    .game-message.show,
+    .hit-indicator.show {
+        animation: none;
+        opacity: 1;
+    }
+}
+```
