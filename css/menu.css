@@ -1,0 +1,555 @@
+```css
+/* =========================================
+   RTTS BASEBALL
+   css/menu.css
+   Menu / Navigation Styles
+========================================= */
+
+/* =========================================
+   START MENU
+========================================= */
+
+.start-menu {
+  position: relative;
+  z-index: 2;
+}
+
+.start-menu .menu-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.start-menu .menu-button::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 80%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.45s ease;
+
+  pointer-events: none;
+}
+
+.start-menu .menu-button:hover::after {
+  left: 140%;
+}
+
+/* =========================================
+   MENU BUTTON STATES
+========================================= */
+
+.menu-button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  touch-action: manipulation;
+}
+
+.menu-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none !important;
+}
+
+/* =========================================
+   PRIMARY MENU
+========================================= */
+
+.menu-button.primary {
+  min-height: 58px;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.menu-button.primary::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.14) 50%,
+      transparent 80%
+    );
+
+  transform: translateX(-100%);
+
+  transition: transform 0.5s ease;
+
+  pointer-events: none;
+}
+
+.menu-button.primary:hover::before {
+  transform: translateX(100%);
+}
+
+/* =========================================
+   CAREER NAVIGATION
+========================================= */
+
+.career-menu {
+  position: relative;
+}
+
+.career-button {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 76px;
+}
+
+.career-button::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: var(--accent);
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  transition: transform 0.18s ease;
+}
+
+.career-button:hover::before {
+  transform: scaleX(1);
+}
+
+/* =========================================
+   ACTIVE CAREER BUTTON
+========================================= */
+
+.career-button.active {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(47, 128, 255, 0.18),
+      rgba(47, 128, 255, 0.05)
+    );
+
+  border-color: rgba(47, 128, 255, 0.35);
+}
+
+.career-button.active::before {
+  transform: scaleX(1);
+}
+
+/* =========================================
+   BACK NAVIGATION
+========================================= */
+
+.back-button {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  touch-action: manipulation;
+}
+
+/* =========================================
+   HEADER NAVIGATION
+========================================= */
+
+.top-bar {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.top-bar button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+#careerSaveButton {
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease;
+}
+
+#careerSaveButton:hover {
+  background: var(--accent);
+
+  border-color: var(--accent);
+
+  color: #fff;
+}
+
+#careerSaveButton:active {
+  transform: scale(0.94);
+}
+
+/* =========================================
+   SAVE / LOAD MENU
+========================================= */
+
+.save-slots {
+  width: 100%;
+}
+
+.save-slot {
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.12s ease;
+}
+
+.save-slot:hover {
+  background: var(--panel-hover);
+
+  border-color: var(--border-strong);
+}
+
+.save-slot:active {
+  transform: translateY(1px);
+}
+
+.save-slot > div:last-child {
+  display: flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SAVE BUTTON
+========================================= */
+
+.save-button,
+.load-button {
+  min-width: 64px;
+
+  border: 1px solid var(--border);
+
+  background: var(--panel-light);
+
+  color: var(--text);
+
+  border-radius: var(--radius-small);
+
+  cursor: pointer;
+
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.12s ease;
+}
+
+.save-button:hover {
+  background: rgba(47, 128, 255, 0.2);
+
+  border-color: rgba(47, 128, 255, 0.4);
+}
+
+.load-button:hover {
+  background: var(--panel-hover);
+
+  border-color: var(--border-strong);
+}
+
+.save-button:active,
+.load-button:active {
+  transform: scale(0.95);
+}
+
+/* =========================================
+   TRAINING NAVIGATION
+========================================= */
+
+.training-list {
+  position: relative;
+}
+
+.training-button {
+  position: relative;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+.training-button::after {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+  top: 0;
+
+  width: 4px;
+  height: 100%;
+
+  background: var(--accent);
+
+  transform: scaleY(0);
+
+  transform-origin: center;
+
+  transition: transform 0.18s ease;
+}
+
+.training-button:hover::after {
+  transform: scaleY(1);
+}
+
+/* =========================================
+   EQUIPMENT NAVIGATION
+========================================= */
+
+.equipment-slot {
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.12s ease;
+}
+
+.equipment-slot:hover {
+  background: var(--panel-hover);
+
+  border-color: var(--border-strong);
+
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   EQUIPMENT DRAW BUTTON
+========================================= */
+
+#equipmentDrawButton {
+  position: relative;
+
+  overflow: hidden;
+}
+
+#equipmentDrawButton::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.45s ease;
+
+  pointer-events: none;
+}
+
+#equipmentDrawButton:hover::after {
+  left: 130%;
+}
+
+/* =========================================
+   CONTRACT BUTTONS
+========================================= */
+
+.contract-offer button {
+  cursor: pointer;
+
+  transition:
+    background 0.12s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.contract-offer button:hover {
+  background: var(--accent-light);
+
+  box-shadow:
+    0 8px 20px rgba(47, 128, 255, 0.22);
+}
+
+.contract-offer button:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
+   LANGUAGE BUTTON
+========================================= */
+
+#languageButton {
+  position: relative;
+}
+
+#languageButton::before {
+  content: "LANG";
+
+  position: absolute;
+
+  left: 12px;
+
+  color: var(--text-muted);
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+
+  opacity: 0;
+
+  transition: opacity 0.15s ease;
+}
+
+#languageButton:hover::before {
+  opacity: 1;
+}
+
+/* =========================================
+   MENU FOCUS
+========================================= */
+
+.menu-button:focus-visible,
+.career-button:focus-visible,
+.training-button:focus-visible,
+.save-button:focus-visible,
+.load-button:focus-visible,
+.back-button:focus-visible,
+#careerSaveButton:focus-visible {
+  outline: 2px solid var(--accent-light);
+
+  outline-offset: 3px;
+}
+
+/* =========================================
+   TOUCH DEVICES
+========================================= */
+
+@media (hover: none) {
+  .menu-button::after,
+  .menu-button.primary::before,
+  #equipmentDrawButton::after {
+    display: none;
+  }
+
+  .career-button:hover,
+  .training-button:hover,
+  .equipment-slot:hover,
+  .save-slot:hover {
+    transform: none;
+  }
+
+  .career-button:active {
+    background: var(--panel-hover);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 760px) {
+  .career-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .save-slot {
+    align-items: flex-start;
+  }
+
+  .save-slot > div:last-child {
+    flex-direction: column;
+  }
+
+  .load-button {
+    margin-top: 6px;
+    margin-left: 0;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .start-menu {
+    width: 100%;
+  }
+
+  .career-menu {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px;
+  }
+
+  .career-button {
+    min-height: 64px;
+
+    font-size: 13px;
+  }
+
+  .save-slot {
+    padding: 14px;
+  }
+
+  .save-slot strong {
+    font-size: 13px;
+  }
+
+  .save-button,
+  .load-button {
+    min-width: 58px;
+
+    padding-left: 9px;
+    padding-right: 9px;
+
+    font-size: 10px;
+  }
+}
+```
