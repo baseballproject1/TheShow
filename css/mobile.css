@@ -1,0 +1,904 @@
+```css
+/* =========================================================
+   THE SHOW RTTS
+   css/mobile.css
+   모바일 / 태블릿 전용 반응형 스타일
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Mobile Base
+   --------------------------------------------------------- */
+
+html,
+body {
+    width: 100%;
+    min-width: 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.screen {
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/* ---------------------------------------------------------
+   Mobile Safe Area
+   --------------------------------------------------------- */
+
+#app {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.screen {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+}
+
+
+/* ---------------------------------------------------------
+   General Touch Optimization
+   --------------------------------------------------------- */
+
+button,
+a,
+select,
+input {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    touch-action: manipulation;
+}
+
+input,
+select {
+    font-size: 16px;
+}
+
+img,
+canvas {
+    max-width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Main Container
+   --------------------------------------------------------- */
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   Panels
+   --------------------------------------------------------- */
+
+.panel {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.panel + .panel {
+    margin-top: 12px;
+}
+
+
+/* ---------------------------------------------------------
+   Start Screen
+   --------------------------------------------------------- */
+
+#startScreen {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:
+        24px
+        14px
+        calc(24px + env(safe-area-inset-bottom));
+}
+
+#startScreen .start-container {
+    width: 100%;
+    max-width: 430px;
+}
+
+#startScreen h1 {
+    font-size: clamp(30px, 9vw, 46px);
+    line-height: 1.05;
+}
+
+#startScreen h2 {
+    font-size: clamp(18px, 5vw, 24px);
+}
+
+#startScreen p {
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   Start Menu Buttons
+   --------------------------------------------------------- */
+
+#startScreen .menu-buttons,
+#startScreen .start-menu,
+#startScreen .button-group {
+    width: 100%;
+}
+
+#startScreen .menu-button,
+#startScreen .start-button {
+    width: 100%;
+    min-height: 52px;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   Player Creation
+   --------------------------------------------------------- */
+
+#createPlayerScreen .create-player-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#createPlayerScreen .player-preview,
+#createPlayerScreen .player-form,
+#createPlayerScreen .stat-allocation {
+    width: 100%;
+}
+
+#playerAvatar {
+    width: min(44vw, 170px);
+    height: min(44vw, 170px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#playerPreviewName {
+    font-size: 20px;
+    text-align: center;
+}
+
+#playerPreviewPosition {
+    font-size: 12px;
+    text-align: center;
+}
+
+#playerName,
+#playerPosition,
+#playerHand {
+    width: 100%;
+    min-height: 48px;
+}
+
+#creationTokens {
+    font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   Stat Allocation
+   --------------------------------------------------------- */
+
+.stat-list {
+    width: 100%;
+}
+
+.stat-row {
+    min-height: 50px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-row .stat-name {
+    min-width: 0;
+    font-size: 12px;
+}
+
+.stat-row .stat-value {
+    min-width: 32px;
+    text-align: center;
+}
+
+.stat-minus,
+.stat-plus {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    padding: 0;
+}
+
+#remainingTokens {
+    font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   Career Screen
+   --------------------------------------------------------- */
+
+#careerScreen {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+}
+
+#careerScreen .career-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#careerPlayerName {
+    font-size: 21px;
+}
+
+#careerTeam,
+#careerLevel {
+    font-size: 12px;
+}
+
+.career-card {
+    width: 100%;
+    overflow: hidden;
+}
+
+#careerCardName {
+    font-size: 20px;
+}
+
+#careerCardPosition,
+#careerCardTeam {
+    font-size: 11px;
+}
+
+.career-card-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.career-stat {
+    min-width: 0;
+    padding: 9px;
+}
+
+.career-stat-label {
+    font-size: 9px;
+}
+
+.career-stat-value {
+    font-size: 17px;
+}
+
+
+/* ---------------------------------------------------------
+   Career Navigation
+   --------------------------------------------------------- */
+
+.career-menu,
+.career-buttons,
+.career-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.career-button {
+    width: 100%;
+    min-height: 52px;
+    padding: 10px 8px;
+    font-size: 12px;
+}
+
+
+/* ---------------------------------------------------------
+   Game Screen
+   --------------------------------------------------------- */
+
+#gameScreen {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#gameScreen > .container,
+#gameScreen .game-container {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* ---------------------------------------------------------
+   Game Header
+   --------------------------------------------------------- */
+
+.game-header {
+    width: 100%;
+}
+
+.game-header .team {
+    overflow: hidden;
+}
+
+.game-header .team-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ---------------------------------------------------------
+   Game Field
+   --------------------------------------------------------- */
+
+.game-field-wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fieldCanvas {
+    width: 100%;
+    max-width: 100%;
+    touch-action: none;
+}
+
+
+/* ---------------------------------------------------------
+   Game Controls
+   --------------------------------------------------------- */
+
+.game-controls {
+    width: 100%;
+}
+
+.control-panel {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Batting
+   --------------------------------------------------------- */
+
+#battingControls {
+    width: 100%;
+}
+
+#battingZone {
+    max-width: 270px;
+    touch-action: none;
+}
+
+.batting-control-side {
+    width: 100%;
+}
+
+#swingButton {
+    width: min(85%, 230px);
+}
+
+
+/* ---------------------------------------------------------
+   Pitching
+   --------------------------------------------------------- */
+
+#pitchingControls {
+    width: 100%;
+}
+
+#pitchZone {
+    max-width: 270px;
+    touch-action: none;
+}
+
+.pitch-buttons {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Fielding
+   --------------------------------------------------------- */
+
+#fieldingControls {
+    width: 100%;
+}
+
+.fielding-control-side {
+    width: 100%;
+}
+
+#throwAim {
+    max-width: 230px;
+    touch-action: none;
+}
+
+#throwButton {
+    width: min(80%, 220px);
+}
+
+
+/* ---------------------------------------------------------
+   Baserunning
+   --------------------------------------------------------- */
+
+#baserunningControls {
+    width: 100%;
+}
+
+#runningJoystick {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.base-buttons {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Virtual Joystick
+   --------------------------------------------------------- */
+
+.joystick {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.joystick-knob {
+    touch-action: none;
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   Training
+   --------------------------------------------------------- */
+
+.training-list,
+.training-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.training-button {
+    width: 100%;
+    min-height: 64px;
+    padding: 10px 8px;
+    font-size: 12px;
+}
+
+#trainingTokens {
+    font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   Equipment
+   --------------------------------------------------------- */
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.equipment-slot {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.equipment-slot-title {
+    font-size: 10px;
+}
+
+.equipment-item {
+    min-width: 0;
+    padding: 10px;
+}
+
+.equipment-item-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#equipmentSalary {
+    font-size: 15px;
+}
+
+#equipmentDrawButton {
+    width: 100%;
+    min-height: 54px;
+}
+
+#equipmentInventory {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+
+/* ---------------------------------------------------------
+   Season
+   --------------------------------------------------------- */
+
+.season-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.season-info-item {
+    min-width: 0;
+}
+
+#seasonNumber,
+#seasonGames,
+#seasonLevel {
+    font-size: 16px;
+}
+
+#seasonProgress {
+    width: 100%;
+    overflow: hidden;
+}
+
+#seasonProgressText {
+    font-size: 11px;
+}
+
+#salaryNegotiationButton {
+    width: 100%;
+    min-height: 54px;
+}
+
+
+/* ---------------------------------------------------------
+   Stats
+   --------------------------------------------------------- */
+
+.record-grid,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.record-item,
+.stats-item {
+    min-width: 0;
+    padding: 10px;
+}
+
+.record-label,
+.stats-label {
+    font-size: 9px;
+}
+
+.record-value,
+.stats-value {
+    font-size: 17px;
+}
+
+
+/* ---------------------------------------------------------
+   Standings
+   --------------------------------------------------------- */
+
+#standingsList {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.standings-table {
+    min-width: 500px;
+}
+
+
+/* ---------------------------------------------------------
+   Save Screen
+   --------------------------------------------------------- */
+
+.save-slots,
+.save-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.save-slot {
+    width: 100%;
+}
+
+.save-slot-info {
+    min-height: 54px;
+}
+
+.save-slot button {
+    min-height: 46px;
+}
+
+[data-save-slot],
+[data-load-slot] {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Contract Screen
+   --------------------------------------------------------- */
+
+#contractScreen {
+    width: 100%;
+}
+
+.contract-offers,
+#contractOffers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.contract-offer {
+    width: 100%;
+}
+
+.contract-offer button {
+    width: 100%;
+    min-height: 50px;
+}
+
+
+/* ---------------------------------------------------------
+   Toast
+   --------------------------------------------------------- */
+
+#toast {
+    left: 50%;
+    right: auto;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    width: calc(100% - 28px);
+    max-width: 420px;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+
+/* ---------------------------------------------------------
+   Loading
+   --------------------------------------------------------- */
+
+#loadingScreen {
+    padding:
+        20px
+        14px
+        calc(20px + env(safe-area-inset-bottom));
+}
+
+.loading-content {
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   Small Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 430px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #startScreen {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .career-menu,
+    .career-buttons,
+    .career-navigation {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .training-list,
+    .training-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .equipment-grid,
+    #equipmentInventory {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .record-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Very Small Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 360px) {
+    .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .career-menu,
+    .career-buttons,
+    .career-navigation {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+
+    .career-button {
+        min-height: 48px;
+        font-size: 11px;
+    }
+
+    .training-list,
+    .training-grid {
+        gap: 5px;
+    }
+
+    .training-button {
+        min-height: 58px;
+        font-size: 11px;
+    }
+
+    .equipment-grid,
+    #equipmentInventory {
+        gap: 5px;
+    }
+
+    .record-grid,
+    .stats-grid {
+        gap: 5px;
+    }
+
+    .stat-row {
+        gap: 4px;
+    }
+
+    .stat-minus,
+    .stat-plus {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Landscape Phones
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) and (orientation: landscape) {
+    #startScreen {
+        min-height: 100svh;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    #startScreen .start-container {
+        max-width: 520px;
+    }
+
+    #startScreen h1 {
+        font-size: 30px;
+    }
+
+    #startScreen .menu-button,
+    #startScreen .start-button {
+        min-height: 44px;
+        margin-bottom: 6px;
+    }
+
+    .game-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #battingControls,
+    #fieldingControls,
+    #baserunningControls {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .training-list,
+    .training-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .equipment-grid,
+    #equipmentInventory {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Touch Device Hover Removal
+   --------------------------------------------------------- */
+
+@media (hover: none) and (pointer: coarse) {
+    button:hover {
+        transform: none;
+    }
+
+    .action-button:hover,
+    .pitch-buttons button:hover,
+    .base-buttons button:hover {
+        background: inherit;
+    }
+
+    button:active {
+        opacity: 0.85;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Dark Mode Protection
+   --------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+    input,
+    select,
+    textarea {
+        color-scheme: dark;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Accessibility
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+```
